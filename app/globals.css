@@ -1,1 +1,48 @@
 @import "tailwindcss";
+
+/* app/mart-style.css (새로 만들기) */
+
+/* 1. 기본 벤토 블록 스타일 */
+.bento-card {
+  @apply bg-white p-8 md:p-10 rounded-[2.5rem] shadow-xl shadow-blue-900/5 border border-white transition-all duration-300;
+}
+
+.bento-card:hover {
+  @apply shadow-2xl;
+}
+
+/* 2. 마트 이름 구글 지도 링크 스타일 */
+.mart-link {
+  @apply text-blue-600 font-bold underline underline-offset-4 transition-colors;
+}
+
+.mart-link:hover {
+  @apply text-blue-800;
+}
+
+/* 3. PDF/인쇄 전용 설정 */
+@media print {
+  @page {
+    size: A4;
+    margin: 15mm;
+  }
+
+  body {
+    background-color: white !important;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .print-hidden {
+    display: none !important;
+  }
+
+  .bento-card {
+    @apply shadow-none border-slate-200 p-6 rounded-xl;
+    break-inside: avoid; /* 페이지 중간에서 박스가 잘리지 않게 방지 */
+  }
+
+  .mart-link {
+    color: #2563eb !important;
+    text-underline-offset: 2px;
+  }
+}
