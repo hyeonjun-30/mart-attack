@@ -5,7 +5,6 @@ export async function POST(req: Request) {
     const { city } = await req.json();
     const apiKey = process.env.GOOGLE_GENERATIVE_AI_API_KEY;
 
-    // 아까 성공했던 Gemini 2.0 모델 주소로 직접 연결
     const response = await fetch(
       `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent?key=${apiKey}`,
       {
@@ -14,7 +13,11 @@ export async function POST(req: Request) {
         body: JSON.stringify({
           contents: [{
             parts: [{ 
-              text: `${city} 지역의 현지 마트 정보와 추천 쇼핑 리스트를 알려줘. 그리고 반드시 마지막 줄에 이 도시 마트의 풍경을 표현한 영어 문장을 'IMAGE_PROMPT: [영어문장]' 형식으로 추가해줘.` 
+              text: `${city} 지역의 현지 마트 정보를 알려줘. 
+              주의사항:
+              1. 추천하는 실제 마트 체인 이름(제목)은 반드시 대괄호를 사용하여 [마트이름] 형식으로 써줘. (예: [Big C], [이온 마트])
+              2. 쇼핑 아이템이나 기타 강조가 필요한 텍스트는 기존처럼 **텍스트** 형식으로 써줘. (예: **야돔**, **라면**)
+              3. 마트 이름에만 대괄호를 붙여야 지도 링크가 걸리니 반드시 지켜줘.` 
             }]
           }]
         }),
@@ -22,21 +25,8 @@ export async function POST(req: Request) {
     );
 
     const data = await response.json();
-    if (!response.ok) throw new Error(data.error?.message || "구글 서버 응답 에러");
-
-    const fullText = data.candidates[0].content.parts[0].text;
-
-    // 텍스트와 이미지 프롬프트를 분리
-    const splitContent = fullText.split("IMAGE_PROMPT:");
-    const mainText = splitContent[0].trim();
-    const imagePrompt = splitContent[1] ? splitContent[1].trim() : `${city} local grocery store, photorealistic`;
-
-    return NextResponse.json({ 
-      text: mainText,
-      imagePrompt: imagePrompt
-    });
-
-  } catch (error: any) {
-    return NextResponse.json({ text: `연결 에러: ${error.message}` }, { status: 500 });
+    return NextResponse.json({ text: data.candidates[0].content.parts[0].text });
+  } catch (error) {
+    return NextResponse.json({ text: "데이터를 가져오는 중 오류가 발생했습니다." }, { status: 500 });
   }
 }
