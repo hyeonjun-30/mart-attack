@@ -1,36 +1,24 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🛒 Mart Attack (마트 어택)
 
-## Getting Started
+> **"현지 마트에서 만나는 진짜 여행"** > 방문할 도시를 입력하면 AI가 현지 마트 정보와 추천 쇼핑 리스트를 알려주고, 구글 지도로 바로 연결해주는 스마트 가이드 서비스입니다.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🚀 주요 기능
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+* **AI 마트 추천**: Google Gemini 2.0 모델을 사용하여 도시별 맞춤형 마트 정보를 제공합니다.
+* **스마트 지도 연결**: 추천된 마트 이름을 클릭하면 즉시 해당 위치의 구글 지도로 이동합니다.
+* **반응형 UI**: Next.js와 Tailwind CSS를 사용하여 모바일과 데스크톱 모두에 최적화된 화면을 제공합니다.
+* **클라우드 배포**: Vercel을 통해 전 세계 어디서든 접속 가능한 URL을 제공합니다.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🛠 사용 기술 (Tech Stack)
 
-## Learn More
+* **Framework**: Next.js 14 (App Router)
+* **Language**: TypeScript
+* **AI Model**: Google Gemini 2.0 Flash
+* **Styling**: Tailwind CSS
+* **Deployment**: Vercel
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
